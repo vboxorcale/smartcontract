@@ -1,0 +1,73 @@
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const previousBlockHash = 'OINAISDFN09N09ASDNF90N90ASNDF';
+var port =3000;  
+var port1 =4000;
+
+
+
+const Blockchain = require('./blockchain');
+const bitcoin = new Blockchain();
+const currentBlockData = {
+    transactions: bitcoin.pendingTransactions,
+    index: lastBlock['index'] + 1
+    };
+const nonce = bitcoin.proofOfWork(previousBlockHash,
+    currentBlockData);
+
+const newBlock = bitcoin.createNewBlock(nonce,
+    previousBlockHash, blockHash);
+app.get('/blockchain', function(req, res) {
+    res.send(bitcoin);
+    });
+    app.get('/mine', function(req, res) {
+        const lastBlock = bitcoin.getLastBlock();
+        const previousBlockHash = lastBlock['hash'];
+        const nonce = bitcoin.proofOfWork(previousBlockHash,
+            currentBlockData);
+        });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+/*app.post('/transaction', function(req, res) {
+    console.log(req.body);
+    res.send(`The amount of the transaction is ${req.body.amount} bitcoin.`);
+    });*/
+    Blockchain.prototype.createNewTransaction = function(amount,
+        sender, recipient) {
+        const newTransaction = {
+        amount: amount,
+        sender: sender,
+        recipient: recipient
+        };
+        this.pendingTransactions.push(newTransaction);
+        return this.getLastBlock()['index'] + 1;
+        };
+        app.post('/transaction', function(req, res) {
+            const blockIndex =
+            bitcoin.createNewTransaction(req.body.amount,
+            req.body.sender, req.body.recipient)
+            res.json({ note:`Transaction will be added in block ${blockIndex}.`});
+            res.json({
+                note: "New block mined successfully",
+                block: newBlock
+                });
+            });
+app.get('/mine', function(req, res) {
+        const newBlock = bitcoin.createNewBlock();
+                });
+                
+app.post('/receive-new-block', function(req, res) {
+                        const newBlock = req.body.newBlock;
+                        const lastBlock = bitcoin.getLastBlock();
+                        const correctHash = lastBlock.hash === newBlock.previousBlockHash; 
+                        const correctIndex = lastBlock['index'] + 1 === newBlock['index'];
+                    });
+
+
+const blockHash = bitcoin.hashBlock(previousBlockHash,
+                currentBlockData, nonce);
+
+    app.listen(port , function() {
+        console.log(`Listening on port ${port}...`);
+    });
