@@ -1,0 +1,3 @@
+[submodule "Coursetro/Coursetro/smartcontract"]
+	path = Coursetro/Coursetro/smartcontract
+	url = https://github.com/vboxorcale/smartcontract.git
