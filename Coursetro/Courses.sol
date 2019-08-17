@@ -9,7 +9,7 @@ contract Courses{
     mapping(address => Instructor) instructors;
     address[] public instructorAccts;
     
-    function setInstructor(address _address, uint _age, string _fName, string _lName)public{
+  function setInstructor(address _address, uint _age, string _fName, string _lName)public{
         var instructor = instructors[_address];
         instructor.age = _age;
         instructor.fName =_fName;
